@@ -6,54 +6,28 @@ Notifica que los datos hayan sido enviados correctamente.
 
 $(document).ready(() => {
   console.log("Script cargado");
-  notific8('Pagina cargada con exito', {
-    life: 3000,
-    theme: 'chicchat',
-    color: 'cobalt'
-  });
-  let nombre, telefono, correo, mensaje;
 
-  $('#nombre').on('blur', () => {
-    nombre = $('#nombre').val();
-  });
-  $('#telefono').on('blur', () => {
-    telefono = $('#telefono').val();
-  })
-  $('#correo').on('blur', () => {
-    correo = $('#correo').val();
-  })
-  $('#mensaje').on('blur', () => {
-    mensaje = $('#mensaje').val();
-  })
+  // Obtenemos los datos del formulario.
+  $('#formulario').submit( (e) => {
 
-  // Probamos la persistencia de los elementos enviadolos la localstorage.
-  $('#botonEnvio').on('click', () => {
-    localStorage.setItem('nombre', nombre);
-    localStorage.setItem('telefono', telefono);
-    localStorage.setItem('correo', correo);
-    localStorage.setItem('mensaje', mensaje);
-    validacionCorreo(correo);
+    e.preventDefault();
+    console.log("Hola!!");
 
-    let dataTOphp = {
-      nombre: nombre,
-      tel: telefono,
-      email: correo,
-      msg: mensaje
-    }
-    // Enviamos los datos por ajax.
+    // Con esto serializamos los datos como un string.
+    let formData = $('#formulario').serialize();
+
+    console.log(JSON.stringify(formData));
+
+    // Usamos ajax para enviar los datos al servidor.
     $.ajax({
       type: "POST",
-      url: "./form-process.php",
-      data: dataTOphp,
-      cache: false,
-      success: notific8('Formulario enviado con exito!!', {
-        life: 5000,
-        theme: 'chicchat',
-        color: 'shamrock'
-      })
+      url: "form-process.php",
+      data: formData,
+      dataType: 'json',
+      success: function(resp){
+        console.log(resp);
+      }
     });
-
-    //$('#respuesta').load("form-process.php");
   });
 
   function validacionCorreo(correo){
@@ -65,7 +39,14 @@ $(document).ready(() => {
     }
   }
 
-  $('#btnAjaxMain').on('click', (e) => {
+  function cargaPHPContent(){
+    console.log("Cargamos el contenido a traves de AJAX");
+    let loadFile = "form-process.php";
+    $('#respuesta').load(loadFile);
+  }
+
+
+  /*$('#btnAjaxMain').on('click', (e) => {
     console.log("funcion del boton ajaxPHP");
     e.preventDefault();
 
@@ -81,6 +62,6 @@ $(document).ready(() => {
   $('#volver').on('click', (e) => {
     e.preventDefault();
     $('html').get('index.html');
-  });
+  });*/
 
 });
