@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Mail JS</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+  <!-- jQuery -->
+  <script
+  src="https://code.jquery.com/jquery-3.2.1.js"
+  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+  crossorigin="anonymous"></script
+  <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.js"></script>
+  <script src="main.js"></script>
+  <!-- Notific8 para notificaciones -->
+  <link rel="stylesheet" href="./node_modules/notific8/dist/notific8.css">
+  <script type="text/javascript" src="./node_modules/notific8/dist/notific8.js">
+  </script>
+</head>
+
+<body>
+  <div class="row">
+    <div class="container">
+      <h1 class="display-4">Formulario</h1>
+
+      <form class="" action="index.html" method="post" id="formulario" action="form-process.php">
+        <div class="form-group">
+          <label for="">Nombre</label>
+          <input type="text" name="nombre" value="" id="nombre">
+        </div>
+        <div class="form-group">
+          <label for="">Telefono</label>
+          <input type="tel" id="telefono">
+        </div>
+        <div class="form-group">
+          <label for="">Correo</label>
+          <input type="email" id="correo">
+        </div>
+        <div class="form-group">
+          <label for="">Mensaje</label>
+          <input type="text" id="mensaje">
+        </div>
+        <button type="button" name="button" class="btn btn-success" id="botonEnvio">Enviar</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="respuesta">
+    <button type="button" name="button" id="botonAjax" class="btn btn-warning">Click me!</button>
+
+    <button type="button" name="button" class="btn btn-danger" id="btnAjaxMain">Click me from main.js</button>
+
+  </div>
+</body>
+
+<script type="text/javascript">
+  $('#botonAjax').on('click', (e) => {
+    e.preventDefault();
+    updateHTMLContent();
+  });
+
+  function updateHTMLContent(){
+    let loadFile = 'testAjax.php';
+    $('#respuesta').load(loadFile);
+  }
+</script>
+
+</html>
